@@ -60,7 +60,12 @@ io.on("connection", (socket) => {
 });
 
 // ── Middleware ──────────────────────────────────
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" },
 }));
