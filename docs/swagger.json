@@ -1,0 +1,136 @@
+
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Monitoring Mobil API",
+    "version": "1.0.0",
+    "description": "Dokumentasi API sistem monitoring mobil PT PLN UP3 Pekanbaru"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Login user/admin",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login berhasil"
+          }
+        }
+      }
+    },
+    "/mobil": {
+      "get": {
+        "summary": "Ambil semua mobil",
+        "tags": ["Mobil"],
+        "responses": {
+          "200": {
+            "description": "Daftar mobil"
+          }
+        }
+      },
+      "post": {
+        "summary": "Tambah mobil baru (admin)",
+        "tags": ["Mobil"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plat_nomor": { "type": "string" },
+                  "tipe_mobil": { "type": "string" },
+                  "status": { "type": "string" },
+                  "gps_device_id": { "type": "string" }
+                },
+                "required": ["plat_nomor", "tipe_mobil", "status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Mobil berhasil ditambahkan"
+          }
+        }
+      }
+    },
+    "/pengajuan": {
+      "post": {
+        "summary": "User ajukan peminjaman mobil",
+        "tags": ["Pengajuan"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": { "type": "integer" },
+                  "mobil_id": { "type": "integer" },
+                  "alasan": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Pengajuan berhasil dibuat" }
+        }
+      },
+      "get": {
+        "summary": "Lihat semua pengajuan (admin)",
+        "tags": ["Pengajuan"],
+        "responses": {
+          "200": { "description": "Daftar pengajuan" }
+        }
+      }
+    },
+    "/notifikasi": {
+      "get": {
+        "summary": "Lihat semua notifikasi user/admin",
+        "tags": ["Notifikasi"],
+        "responses": {
+          "200": { "description": "Daftar notifikasi" }
+        }
+      }
+    },
+    "/riwayat": {
+      "get": {
+        "summary": "Ambil semua riwayat peminjaman",
+        "tags": ["Riwayat"],
+        "responses": {
+          "200": { "description": "Daftar riwayat" }
+        }
+      }
+    },
+    "/gps": {
+      "get": {
+        "summary": "Ambil data GPS mobil",
+        "tags": ["GPS"],
+        "responses": {
+          "200": { "description": "Data GPS mobil" }
+        }
+      }
+    }
+  }
+}
